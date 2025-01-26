@@ -1,0 +1,580 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXContainerItemProxy section */
+		DB3CF9422D4620BE0055AEFA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DB3CF9222D4620BC0055AEFA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DB3CF9292D4620BC0055AEFA;
+			remoteInfo = QuestWeaver;
+		};
+		DB3CF94C2D4620BE0055AEFA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DB3CF9222D4620BC0055AEFA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DB3CF9292D4620BC0055AEFA;
+			remoteInfo = QuestWeaver;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		DB3CF92A2D4620BC0055AEFA /* QuestWeaver.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QuestWeaver.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		DB3CF9412D4620BE0055AEFA /* QuestWeaverTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QuestWeaverTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		DB3CF94B2D4620BE0055AEFA /* QuestWeaverUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QuestWeaverUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		DB3CF9532D4620BE0055AEFA /* Exceptions for "QuestWeaver" folder in "QuestWeaver" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = DB3CF9292D4620BC0055AEFA /* QuestWeaver */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		DB3CF92C2D4620BC0055AEFA /* QuestWeaver */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				DB3CF9532D4620BE0055AEFA /* Exceptions for "QuestWeaver" folder in "QuestWeaver" target */,
+			);
+			path = QuestWeaver;
+			sourceTree = "<group>";
+		};
+		DB3CF9442D4620BE0055AEFA /* QuestWeaverTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = QuestWeaverTests;
+			sourceTree = "<group>";
+		};
+		DB3CF94E2D4620BE0055AEFA /* QuestWeaverUITests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = QuestWeaverUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		DB3CF9272D4620BC0055AEFA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DB3CF93E2D4620BE0055AEFA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DB3CF9482D4620BE0055AEFA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		DB3CF9212D4620BC0055AEFA = {
+			isa = PBXGroup;
+			children = (
+				DB3CF92C2D4620BC0055AEFA /* QuestWeaver */,
+				DB3CF9442D4620BE0055AEFA /* QuestWeaverTests */,
+				DB3CF94E2D4620BE0055AEFA /* QuestWeaverUITests */,
+				DB3CF92B2D4620BC0055AEFA /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		DB3CF92B2D4620BC0055AEFA /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				DB3CF92A2D4620BC0055AEFA /* QuestWeaver.app */,
+				DB3CF9412D4620BE0055AEFA /* QuestWeaverTests.xctest */,
+				DB3CF94B2D4620BE0055AEFA /* QuestWeaverUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		DB3CF9292D4620BC0055AEFA /* QuestWeaver */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DB3CF9542D4620BE0055AEFA /* Build configuration list for PBXNativeTarget "QuestWeaver" */;
+			buildPhases = (
+				DB3CF9262D4620BC0055AEFA /* Sources */,
+				DB3CF9272D4620BC0055AEFA /* Frameworks */,
+				DB3CF9282D4620BC0055AEFA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				DB3CF92C2D4620BC0055AEFA /* QuestWeaver */,
+			);
+			name = QuestWeaver;
+			packageProductDependencies = (
+			);
+			productName = QuestWeaver;
+			productReference = DB3CF92A2D4620BC0055AEFA /* QuestWeaver.app */;
+			productType = "com.apple.product-type.application";
+		};
+		DB3CF9402D4620BE0055AEFA /* QuestWeaverTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DB3CF9592D4620BE0055AEFA /* Build configuration list for PBXNativeTarget "QuestWeaverTests" */;
+			buildPhases = (
+				DB3CF93D2D4620BE0055AEFA /* Sources */,
+				DB3CF93E2D4620BE0055AEFA /* Frameworks */,
+				DB3CF93F2D4620BE0055AEFA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				DB3CF9432D4620BE0055AEFA /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				DB3CF9442D4620BE0055AEFA /* QuestWeaverTests */,
+			);
+			name = QuestWeaverTests;
+			packageProductDependencies = (
+			);
+			productName = QuestWeaverTests;
+			productReference = DB3CF9412D4620BE0055AEFA /* QuestWeaverTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		DB3CF94A2D4620BE0055AEFA /* QuestWeaverUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DB3CF95C2D4620BE0055AEFA /* Build configuration list for PBXNativeTarget "QuestWeaverUITests" */;
+			buildPhases = (
+				DB3CF9472D4620BE0055AEFA /* Sources */,
+				DB3CF9482D4620BE0055AEFA /* Frameworks */,
+				DB3CF9492D4620BE0055AEFA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				DB3CF94D2D4620BE0055AEFA /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				DB3CF94E2D4620BE0055AEFA /* QuestWeaverUITests */,
+			);
+			name = QuestWeaverUITests;
+			packageProductDependencies = (
+			);
+			productName = QuestWeaverUITests;
+			productReference = DB3CF94B2D4620BE0055AEFA /* QuestWeaverUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		DB3CF9222D4620BC0055AEFA /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1620;
+				LastUpgradeCheck = 1620;
+				TargetAttributes = {
+					DB3CF9292D4620BC0055AEFA = {
+						CreatedOnToolsVersion = 16.2;
+					};
+					DB3CF9402D4620BE0055AEFA = {
+						CreatedOnToolsVersion = 16.2;
+						TestTargetID = DB3CF9292D4620BC0055AEFA;
+					};
+					DB3CF94A2D4620BE0055AEFA = {
+						CreatedOnToolsVersion = 16.2;
+						TestTargetID = DB3CF9292D4620BC0055AEFA;
+					};
+				};
+			};
+			buildConfigurationList = DB3CF9252D4620BC0055AEFA /* Build configuration list for PBXProject "QuestWeaver" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = DB3CF9212D4620BC0055AEFA;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = DB3CF92B2D4620BC0055AEFA /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				DB3CF9292D4620BC0055AEFA /* QuestWeaver */,
+				DB3CF9402D4620BE0055AEFA /* QuestWeaverTests */,
+				DB3CF94A2D4620BE0055AEFA /* QuestWeaverUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		DB3CF9282D4620BC0055AEFA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DB3CF93F2D4620BE0055AEFA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DB3CF9492D4620BE0055AEFA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		DB3CF9262D4620BC0055AEFA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DB3CF93D2D4620BE0055AEFA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DB3CF9472D4620BE0055AEFA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		DB3CF9432D4620BE0055AEFA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DB3CF9292D4620BC0055AEFA /* QuestWeaver */;
+			targetProxy = DB3CF9422D4620BE0055AEFA /* PBXContainerItemProxy */;
+		};
+		DB3CF94D2D4620BE0055AEFA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DB3CF9292D4620BC0055AEFA /* QuestWeaver */;
+			targetProxy = DB3CF94C2D4620BE0055AEFA /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		DB3CF9552D4620BE0055AEFA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = QuestWeaver/QuestWeaver.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"QuestWeaver/Preview Content\"";
+				DEVELOPMENT_TEAM = 9NP8FJJ56D;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = QuestWeaver/Info.plist;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.RiverWolf.QuestWeaver;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		DB3CF9562D4620BE0055AEFA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = QuestWeaver/QuestWeaver.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"QuestWeaver/Preview Content\"";
+				DEVELOPMENT_TEAM = 9NP8FJJ56D;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = QuestWeaver/Info.plist;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.RiverWolf.QuestWeaver;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		DB3CF9572D4620BE0055AEFA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		DB3CF9582D4620BE0055AEFA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		DB3CF95A2D4620BE0055AEFA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 9NP8FJJ56D;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.RiverWolf.QuestWeaverTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/QuestWeaver.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/QuestWeaver";
+			};
+			name = Debug;
+		};
+		DB3CF95B2D4620BE0055AEFA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 9NP8FJJ56D;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.RiverWolf.QuestWeaverTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/QuestWeaver.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/QuestWeaver";
+			};
+			name = Release;
+		};
+		DB3CF95D2D4620BE0055AEFA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 9NP8FJJ56D;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.RiverWolf.QuestWeaverUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = QuestWeaver;
+			};
+			name = Debug;
+		};
+		DB3CF95E2D4620BE0055AEFA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 9NP8FJJ56D;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.RiverWolf.QuestWeaverUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = QuestWeaver;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		DB3CF9252D4620BC0055AEFA /* Build configuration list for PBXProject "QuestWeaver" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DB3CF9572D4620BE0055AEFA /* Debug */,
+				DB3CF9582D4620BE0055AEFA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DB3CF9542D4620BE0055AEFA /* Build configuration list for PBXNativeTarget "QuestWeaver" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DB3CF9552D4620BE0055AEFA /* Debug */,
+				DB3CF9562D4620BE0055AEFA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DB3CF9592D4620BE0055AEFA /* Build configuration list for PBXNativeTarget "QuestWeaverTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DB3CF95A2D4620BE0055AEFA /* Debug */,
+				DB3CF95B2D4620BE0055AEFA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DB3CF95C2D4620BE0055AEFA /* Build configuration list for PBXNativeTarget "QuestWeaverUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DB3CF95D2D4620BE0055AEFA /* Debug */,
+				DB3CF95E2D4620BE0055AEFA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = DB3CF9222D4620BC0055AEFA /* Project object */;
+}
