@@ -1,5 +1,5 @@
 //
-//  HomeScreen.swift
+//  HomeScreenIPhone.swift
 //  QuestWeaver
 //
 //  Created by Roger Barron on 27/1/2025.
@@ -7,29 +7,15 @@
 
 import SwiftUI
 
-struct HomeScreen: View {
+struct HomeScreenIPhone: View {
     var body: some View {
-        let deviceModel = UIDevice.current.userInterfaceIdiom
-        let isIPhoneSE = deviceModel == .phone && UIScreen.main.bounds.width <= 375
-        let isIpad = deviceModel == .pad
-        let isIpadAir = isIpad && UIScreen.main.bounds.height == 1024 // Adjust height as needed for iPad Air
+        let screenSize = UIScreen.main.bounds.size
+        let isIPhoneSE = (screenSize.width <= 375 && screenSize.height <= 667) || (screenSize.width <= 667 && screenSize.height <= 375)
         
         Group {
             if isIPhoneSE {
                 // SE version
                 Image("homescreenSE")
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .ignoresSafeArea()
-            } else if isIpadAir {
-                // iPad Air version
-                Image("homescreenIpadAir")
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .ignoresSafeArea()
-            } else if isIpad {
-                // iPad version
-                Image("homescreenIpad")
                     .resizable()
                     .aspectRatio(contentMode: .fill)
                     .ignoresSafeArea()
@@ -45,6 +31,6 @@ struct HomeScreen: View {
 }
 
 #Preview {
-    HomeScreen()
+    HomeScreenIPhone()
 }
 
