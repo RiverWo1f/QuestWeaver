@@ -12,19 +12,45 @@ struct HomeScreenIPhone: View {
         let screenSize = UIScreen.main.bounds.size
         let isIPhoneSE = (screenSize.width <= 375 && screenSize.height <= 667) || (screenSize.width <= 667 && screenSize.height <= 375)
         
+        // Background layer
         Group {
             if isIPhoneSE {
-                // SE version
                 Image("homescreenSE")
                     .resizable()
                     .aspectRatio(contentMode: .fill)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .background(Color.black)
                     .ignoresSafeArea()
             } else {
-                // Standard iPhone version
                 Image("homescreen")
                     .resizable()
                     .aspectRatio(contentMode: .fill)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .background(Color.black)
                     .ignoresSafeArea()
+            }
+        }
+        .overlay {
+            GeometryReader { geometry in
+                ZStack {
+                    // Background scroll
+                    HStack {
+                        Image("scrollMenu")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .padding(.leading, 3)
+                        Spacer()
+                    }
+                    .ignoresSafeArea(.container, edges: [.top, .bottom])
+                    
+                    // Play button in front
+                    HStack {
+                        Image("playButton")
+                            .padding(.leading, 20)
+                        Spacer()
+                    }
+                    .ignoresSafeArea(.container, edges: [.top, .bottom])
+                }
             }
         }
     }
@@ -33,4 +59,3 @@ struct HomeScreenIPhone: View {
 #Preview {
     HomeScreenIPhone()
 }
-
