@@ -33,20 +33,48 @@ struct HomeScreenIPhone: View {
         .overlay {
             GeometryReader { geometry in
                 ZStack {
-                    // Background scroll
+                    // Background scroll - using native size
                     HStack {
                         Image("scrollMenu")
                             .resizable()
                             .aspectRatio(contentMode: .fit)
-                            .padding(.leading, 3)
+                            .frame(width: isIPhoneSE ? 555/2 : 833/3)  // Convert from pixels to points
                         Spacer()
                     }
                     .ignoresSafeArea(.container, edges: [.top, .bottom])
                     
-                    // Play button in front
+                    // Play button in front - using native size
                     HStack {
-                        Image("playButton")
-                            .padding(.leading, 20)
+                        Image(isIPhoneSE ? "playButtonSE" : "playButton")
+                            .frame(width: isIPhoneSE ? 455/2 : 683/3, height: isIPhoneSE ? 147/2 : 220/3)
+                            .offset(x: 25, y: -130)  // Adjusted spacing
+                        Spacer()
+                    }
+                    .ignoresSafeArea(.container, edges: [.top, .bottom])
+                    
+                    // Setup button in front - using native size
+                    HStack {
+                        Image(isIPhoneSE ? "setupButtonSE" : "setupButton")
+                            .frame(width: isIPhoneSE ? 455/2 : 683/3, height: isIPhoneSE ? 147/2 : 220/3)
+                            .offset(x: 25, y: -42)  // Adjusted spacing
+                        Spacer()
+                    }
+                    .ignoresSafeArea(.container, edges: [.top, .bottom])
+                    
+                    // Editor button in front - using native size
+                    HStack {
+                        Image(isIPhoneSE ? "editorButtonSE" : "editorButton")
+                            .frame(width: isIPhoneSE ? 455/2 : 683/3, height: isIPhoneSE ? 147/2 : 220/3)
+                            .offset(x: 25, y: 48)  // Adjusted spacing
+                        Spacer()
+                    }
+                    .ignoresSafeArea(.container, edges: [.top, .bottom])
+                    
+                    // Download button in front - using native size
+                    HStack {
+                        Image(isIPhoneSE ? "downloadButtonSE" : "downloadButton")
+                            .frame(width: isIPhoneSE ? 455/2 : 683/3, height: isIPhoneSE ? 147/2 : 220/3)
+                            .offset(x: 25, y: 140)  // Adjusted spacing
                         Spacer()
                     }
                     .ignoresSafeArea(.container, edges: [.top, .bottom])
