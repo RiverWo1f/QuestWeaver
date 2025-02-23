@@ -1,7 +1,7 @@
 {
   "images" : [
     {
-      "filename" : "QuestWeaver logo icon 1.png",
+      "filename" : "QuestWeaver logo icon update.png",
       "idiom" : "universal",
       "platform" : "ios",
       "size" : "1024x1024"
@@ -13,7 +13,7 @@
           "value" : "dark"
         }
       ],
-      "filename" : "QuestWeaver logo icon 2.png",
+      "filename" : "QuestWeaver logo icon update 1.png",
       "idiom" : "universal",
       "platform" : "ios",
       "size" : "1024x1024"
@@ -25,7 +25,7 @@
           "value" : "tinted"
         }
       ],
-      "filename" : "QuestWeaver logo icon 3.png",
+      "filename" : "QuestWeaver logo icon update 2.png",
       "idiom" : "universal",
       "platform" : "ios",
       "size" : "1024x1024"
