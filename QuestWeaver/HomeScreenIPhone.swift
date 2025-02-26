@@ -9,6 +9,10 @@ import SwiftUI
 
 struct HomeScreenIPhone: View {
     @State private var showWorldEditor = false
+    @State private var showPlay = false
+    @State private var showSetup = false
+    @State private var showEditor = false
+    @State private var showDownload = false
     
     var body: some View {
         NavigationStack {
@@ -41,48 +45,79 @@ struct HomeScreenIPhone: View {
                             Image("scrollMenu")
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
-                                .frame(width: isIPhoneSE ? 555/2 : 833/3)  // Convert from pixels to points
+                                .frame(width: isIPhoneSE ? 555/2 : 833/3)
+                                .offset(x: 24, y: 0)
                             Spacer()
                         }
                         .ignoresSafeArea(.container, edges: [.top, .bottom])
                         
-                        // Play button in front - using native size
+                        // Play button
                         HStack {
-                            Image(isIPhoneSE ? "playButtonSE" : "playButton")
-                                .frame(width: isIPhoneSE ? 455/2 : 683/3, height: isIPhoneSE ? 147/2 : 220/3)
-                                .offset(x: 25, y: -130)  // Adjusted spacing
-                            Spacer()
-                        }
-                        .ignoresSafeArea(.container, edges: [.top, .bottom])
-                        
-                        // Setup button in front - using native size
-                        HStack {
-                            Image(isIPhoneSE ? "setupButtonSE" : "setupButton")
-                                .frame(width: isIPhoneSE ? 455/2 : 683/3, height: isIPhoneSE ? 147/2 : 220/3)
-                                .offset(x: 25, y: -42)  // Adjusted spacing
-                            Spacer()
-                        }
-                        .ignoresSafeArea(.container, edges: [.top, .bottom])
-                        
-                        // Editor button
-                        HStack {
-                            NavigationLink(destination: WorldEditorLoadIPhone()) {
-                                Image(isIPhoneSE ? "editorButtonSE" : "editorButton")
+                            ZStack {
+                                Image(isIPhoneSE ? "playButtonSE" : "playButton")
                                     .frame(width: isIPhoneSE ? 455/2 : 683/3, height: isIPhoneSE ? 147/2 : 220/3)
-                                    .offset(x: 50, y: 47)
+                                
+                                NavigationLink(destination: PlayGame()) {
+                                    Rectangle()
+                                        .fill(Color.clear)
+                                        .frame(width: isIPhoneSE ? 455/2 : 683/3, height: isIPhoneSE ? 147/2 : 220/3)
+                                }
                             }
+                            .offset(x: 72, y: -120)
                             Spacer()
                         }
                         .ignoresSafeArea()
                         
-                        // Download button in front - using native size
+                        // Setup button
                         HStack {
-                            Image(isIPhoneSE ? "downloadButtonSE" : "downloadButton")
-                                .frame(width: isIPhoneSE ? 455/2 : 683/3, height: isIPhoneSE ? 147/2 : 220/3)
-                                .offset(x: 25, y: 140)  // Adjusted spacing
+                            ZStack {
+                                Image(isIPhoneSE ? "setupButtonSE" : "setupButton")
+                                    .frame(width: isIPhoneSE ? 455/2 : 683/3, height: isIPhoneSE ? 147/2 : 220/3)
+                                
+                                NavigationLink(destination: SetupGame()) {
+                                    Rectangle()
+                                        .fill(Color.clear)
+                                        .frame(width: isIPhoneSE ? 455/2 : 683/3, height: isIPhoneSE ? 147/2 : 220/3)
+                                }
+                            }
+                            .offset(x: 72, y: -37)
                             Spacer()
                         }
-                        .ignoresSafeArea(.container, edges: [.top, .bottom])
+                        .ignoresSafeArea()
+                        
+                        // Editor button
+                        HStack {
+                            ZStack {
+                                Image(isIPhoneSE ? "editorButtonSE" : "editorButton")
+                                    .frame(width: isIPhoneSE ? 455/2 : 683/3, height: isIPhoneSE ? 147/2 : 220/3)
+                                
+                                NavigationLink(destination: WorldEditorLoadIPhone()) {
+                                    Rectangle()
+                                        .fill(Color.clear)
+                                        .frame(width: isIPhoneSE ? 455/2 : 683/3, height: isIPhoneSE ? 147/2 : 220/3)
+                                }
+                            }
+                            .offset(x: 72, y: 47)
+                            Spacer()
+                        }
+                        .ignoresSafeArea()
+                        
+                        // Download button
+                        HStack {
+                            ZStack {
+                                Image(isIPhoneSE ? "downloadButtonSE" : "downloadButton")
+                                    .frame(width: isIPhoneSE ? 455/2 : 683/3, height: isIPhoneSE ? 147/2 : 220/3)
+                                
+                                NavigationLink(destination: Text("Download Screen")) {
+                                    Rectangle()
+                                        .fill(Color.clear)
+                                        .frame(width: isIPhoneSE ? 455/2 : 683/3, height: isIPhoneSE ? 147/2 : 220/3)
+                                }
+                            }
+                            .offset(x: 72, y: 132)
+                            Spacer()
+                        }
+                        .ignoresSafeArea()
                     }
                 }
             }
