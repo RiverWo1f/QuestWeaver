@@ -46,7 +46,7 @@ struct HomeScreenIPhone: View {
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
                                 .frame(width: isIPhoneSE ? 555/2 : 833/3)
-                                .offset(x: 24, y: 0)
+                                .offset(x: isIPhoneSE ? -10 : 24, y: isIPhoneSE ? 0 : 0)
                             Spacer()
                         }
                         .ignoresSafeArea(.container, edges: [.top, .bottom])
@@ -56,6 +56,7 @@ struct HomeScreenIPhone: View {
                             ZStack {
                                 Image(isIPhoneSE ? "playButtonSE" : "playButton")
                                     .frame(width: isIPhoneSE ? 455/2 : 683/3, height: isIPhoneSE ? 147/2 : 220/3)
+                                    .contentShape(Rectangle())
                                 
                                 NavigationLink(destination: PlayGame()) {
                                     Rectangle()
@@ -63,7 +64,7 @@ struct HomeScreenIPhone: View {
                                         .frame(width: isIPhoneSE ? 455/2 : 683/3, height: isIPhoneSE ? 147/2 : 220/3)
                                 }
                             }
-                            .offset(x: 72, y: -120)
+                            .offset(x: isIPhoneSE ? 15 : 72, y: isIPhoneSE ? -120 : -120)
                             Spacer()
                         }
                         .ignoresSafeArea()
@@ -73,6 +74,7 @@ struct HomeScreenIPhone: View {
                             ZStack {
                                 Image(isIPhoneSE ? "setupButtonSE" : "setupButton")
                                     .frame(width: isIPhoneSE ? 455/2 : 683/3, height: isIPhoneSE ? 147/2 : 220/3)
+                                    .contentShape(Rectangle())
                                 
                                 NavigationLink(destination: SetupGame()) {
                                     Rectangle()
@@ -80,7 +82,7 @@ struct HomeScreenIPhone: View {
                                         .frame(width: isIPhoneSE ? 455/2 : 683/3, height: isIPhoneSE ? 147/2 : 220/3)
                                 }
                             }
-                            .offset(x: 72, y: -37)
+                            .offset(x: isIPhoneSE ? 15 : 72, y: isIPhoneSE ? -40 : -37)
                             Spacer()
                         }
                         .ignoresSafeArea()
@@ -90,6 +92,7 @@ struct HomeScreenIPhone: View {
                             ZStack {
                                 Image(isIPhoneSE ? "editorButtonSE" : "editorButton")
                                     .frame(width: isIPhoneSE ? 455/2 : 683/3, height: isIPhoneSE ? 147/2 : 220/3)
+                                    .contentShape(Rectangle())
                                 
                                 NavigationLink(destination: WorldEditorLoadIPhone()) {
                                     Rectangle()
@@ -97,7 +100,7 @@ struct HomeScreenIPhone: View {
                                         .frame(width: isIPhoneSE ? 455/2 : 683/3, height: isIPhoneSE ? 147/2 : 220/3)
                                 }
                             }
-                            .offset(x: 72, y: 47)
+                            .offset(x: isIPhoneSE ? 15 : 72, y: isIPhoneSE ? 40 : 47)
                             Spacer()
                         }
                         .ignoresSafeArea()
@@ -107,6 +110,7 @@ struct HomeScreenIPhone: View {
                             ZStack {
                                 Image(isIPhoneSE ? "downloadButtonSE" : "downloadButton")
                                     .frame(width: isIPhoneSE ? 455/2 : 683/3, height: isIPhoneSE ? 147/2 : 220/3)
+                                    .contentShape(Rectangle())
                                 
                                 NavigationLink(destination: Text("Download Screen")) {
                                     Rectangle()
@@ -114,7 +118,7 @@ struct HomeScreenIPhone: View {
                                         .frame(width: isIPhoneSE ? 455/2 : 683/3, height: isIPhoneSE ? 147/2 : 220/3)
                                 }
                             }
-                            .offset(x: 72, y: 132)
+                            .offset(x: isIPhoneSE ? 15 : 72, y: isIPhoneSE ? 120 : 132)
                             Spacer()
                         }
                         .ignoresSafeArea()
