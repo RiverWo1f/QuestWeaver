@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct HomeScreenIPad: View {
+    @State private var navigateToWorldEditor = false
+    
     private var imageToUse: String {
         let screenSize = UIScreen.main.bounds.size
         let width = screenSize.width
@@ -31,36 +33,42 @@ struct HomeScreenIPad: View {
     }
     
     var body: some View {
-        ZStack {
-            // Black background to cover any white lines
-            Color.black
-                .ignoresSafeArea()
-            
-            Image(imageToUse)
-                .resizable()
-                .aspectRatio(contentMode: .fill)
-                .background(Color.black)
-                .ignoresSafeArea()
-                .offset(y: -1)
-            
-            VStack {
-                Spacer()
+        NavigationStack {
+            ZStack {
+                // Black background to cover any white lines
+                Color.black
+                    .ignoresSafeArea()
                 
-                HStack(spacing: 100) { // Added spacing between buttons
-                    // Editor button on the left
-                    Image(isIpadAir ? "editorButtonIpadAir" : "editorButtonIpad")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 683/2)
+                Image(imageToUse)
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .background(Color.black)
+                    .ignoresSafeArea()
+                    .offset(y: -1)
+                
+                VStack {
+                    Spacer()
                     
-                    // Download button
-                    Image(isIpadAir ? "downloadButtonIpadAir" : "downloadButtonIpad")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 683/2)
+                    HStack(spacing: 100) { // Added spacing between buttons
+                        // Editor button on the left
+                        NavigationLink {
+                            WorldEditorLoadIPad()
+                        } label: {
+                            Image(isIpadAir ? "editorButtonIpadAir" : "editorButtonIpad")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 683/2)
+                        }
+                        
+                        // Download button
+                        Image(isIpadAir ? "downloadButtonIpadAir" : "downloadButtonIpad")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 683/2)
+                    }
+                    .ignoresSafeArea()
+                    .padding(.bottom, 8) // Adjust this value to move buttons up
                 }
-                .ignoresSafeArea()
-                .padding(.bottom, 8) // Adjust this value to move buttons up
             }
         }
     }

@@ -30,7 +30,21 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		DB3CF9532D4620BE0055AEFA /* Exceptions for "QuestWeaver" folder in "QuestWeaver" target */ = {
+		DBAC4DC12D71B7B80040D2ED /* Exceptions for "QuestWeaver" folder in "QuestWeaverTests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = DB3CF9402D4620BE0055AEFA /* QuestWeaverTests */;
+		};
+		DBAC4DC22D71B7B80040D2ED /* Exceptions for "QuestWeaver" folder in "QuestWeaverUITests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = DB3CF94A2D4620BE0055AEFA /* QuestWeaverUITests */;
+		};
+		DBAC4DC62D71C0220040D2ED /* Exceptions for "QuestWeaver" folder in "QuestWeaver" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
@@ -43,7 +57,9 @@
 		DB3CF92C2D4620BC0055AEFA /* QuestWeaver */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				DB3CF9532D4620BE0055AEFA /* Exceptions for "QuestWeaver" folder in "QuestWeaver" target */,
+				DBAC4DC62D71C0220040D2ED /* Exceptions for "QuestWeaver" folder in "QuestWeaver" target */,
+				DBAC4DC12D71B7B80040D2ED /* Exceptions for "QuestWeaver" folder in "QuestWeaverTests" target */,
+				DBAC4DC22D71B7B80040D2ED /* Exceptions for "QuestWeaver" folder in "QuestWeaverUITests" target */,
 			);
 			path = QuestWeaver;
 			sourceTree = "<group>";

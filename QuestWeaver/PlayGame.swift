@@ -17,10 +17,6 @@ struct PlayGame: View {
                 .resizable()
                 .aspectRatio(contentMode: .fill)
                 .ignoresSafeArea()
-            
-            Text("Play Game Screen")
-                .font(.largeTitle)
-                .foregroundColor(.white)
         }
         .onAppear {
             // Force landscape
