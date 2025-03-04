@@ -8,68 +8,73 @@
 import SwiftUI
 
 struct HomeScreenIPad: View {
-    @State private var navigateToWorldEditor = false
+    @State private var showWorldEditor = false
     
     private var imageToUse: String {
         let screenSize = UIScreen.main.bounds.size
         let width = screenSize.width
-        let height = screenSize.height
         
-        // Check both dimensions to handle both orientations
-        if width >= 1366 || height >= 1366 {
+        if width >= 1366 {
             return "homescreenIpadPro"  // 12.9-inch iPad Pro
         }
-        else if width >= 820 || height >= 820 {
+        else if width >= 1180 {
             return "homescreenIpadAir"  // iPad Air and 11-inch iPad Pro
         }
         else {
-            return "homescreenIpad"  // Smaller iPads
+            return "homescreenIpad"  // Standard iPads (10.2")
         }
     }
     
     private var isIpadAir: Bool {
         let screenSize = UIScreen.main.bounds.size
-        return screenSize.width >= 820 || screenSize.height >= 820
+        return screenSize.width >= 1180 && screenSize.width < 1366
+    }
+    
+    private var isIpadPro: Bool {
+        let screenSize = UIScreen.main.bounds.size
+        return screenSize.width >= 1366
     }
     
     var body: some View {
-        NavigationStack {
-            ZStack {
-                // Black background to cover any white lines
-                Color.black
-                    .ignoresSafeArea()
+        ZStack {
+            Color.black
+                .ignoresSafeArea()
+            
+            Image(imageToUse)
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .background(Color.black)
+                .ignoresSafeArea()
+            
+            VStack {
+                Spacer()
                 
-                Image(imageToUse)
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .background(Color.black)
-                    .ignoresSafeArea()
-                    .offset(y: -1)
-                
-                VStack {
-                    Spacer()
-                    
-                    HStack(spacing: 100) { // Added spacing between buttons
-                        // Editor button on the left
-                        NavigationLink {
-                            WorldEditorLoadIPad()
-                        } label: {
-                            Image(isIpadAir ? "editorButtonIpadAir" : "editorButtonIpad")
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: 683/2)
-                        }
-                        
-                        // Download button
-                        Image(isIpadAir ? "downloadButtonIpadAir" : "downloadButtonIpad")
+                HStack(spacing: 100) {
+                    // Editor button on the left
+                    Button {
+                        showWorldEditor = true
+                    } label: {
+                        Image(isIpadPro ? "editorButtonIpadPro" : 
+                              isIpadAir ? "editorButtonIpadAir" : "editorButtonIpad")
                             .resizable()
                             .aspectRatio(contentMode: .fit)
                             .frame(width: 683/2)
                     }
-                    .ignoresSafeArea()
-                    .padding(.bottom, 8) // Adjust this value to move buttons up
+                    
+                    // Download button
+                    Image(isIpadPro ? "downloadButtonIpadPro" : 
+                          isIpadAir ? "downloadButtonIpadAir" : "downloadButtonIpad")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 683/2)
                 }
+                .ignoresSafeArea()
+                .padding(.bottom, isIpadPro ? 3 : isIpadAir ? -12 : 8)
             }
+        }
+        .fullScreenCover(isPresented: $showWorldEditor) {
+            WorldEditorLoadIPad()
         }
     }
 }
