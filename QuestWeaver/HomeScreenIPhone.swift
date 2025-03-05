@@ -90,13 +90,10 @@ struct HomeScreenIPhone: View {
                         // Editor button
                         HStack {
                             ZStack {
-                                Image(isIPhoneSE ? "editorButtonSE" : "editorButton")
-                                    .frame(width: isIPhoneSE ? 455/2 : 683/3, height: isIPhoneSE ? 147/2 : 220/3)
-                                    .contentShape(Rectangle())
-                                
-                                NavigationLink(destination: WorldEditorLoadIPhone()) {
-                                    Rectangle()
-                                        .fill(Color.clear)
+                                Button {
+                                    showWorldEditor = true
+                                } label: {
+                                    Image(isIPhoneSE ? "editorButtonSE" : "editorButton")
                                         .frame(width: isIPhoneSE ? 455/2 : 683/3, height: isIPhoneSE ? 147/2 : 220/3)
                                 }
                             }
@@ -125,6 +122,9 @@ struct HomeScreenIPhone: View {
                     }
                 }
             }
+        }
+        .fullScreenCover(isPresented: $showWorldEditor) {
+            WorldEditorLoadIPhone()
         }
     }
 }

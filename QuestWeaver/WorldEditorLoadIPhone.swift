@@ -9,6 +9,7 @@ import SwiftUI
 
 struct WorldEditorLoadIPhone: View {
     @Environment(\.dismiss) private var dismiss
+    @State private var buttonsOpacity: Double = 0  // Add this for fade animation
     
     var body: some View {
         let screenSize = UIScreen.main.bounds.size
@@ -28,14 +29,10 @@ struct WorldEditorLoadIPhone: View {
             // Back button with navigation
             HStack {
                 ZStack {
-                    Image(isIPhoneSE ? "backButtonSE" : "backButtonIphone")
-                        .frame(width: isIPhoneSE ? 455/2 : 683/3, height: isIPhoneSE ? 147/2 : 220/3)
-                    
-                    Button(action: {
+                    Button {
                         dismiss()
-                    }) {
-                        Rectangle()
-                            .fill(Color.clear)
+                    } label: {
+                        Image(isIPhoneSE ? "backButtonSE" : "backButtonIphone")
                             .frame(width: isIPhoneSE ? 455/2 : 683/3, height: isIPhoneSE ? 147/2 : 220/3)
                     }
                 }
@@ -91,7 +88,7 @@ struct WorldEditorLoadIPhone: View {
             .offset(y: 20)
             .ignoresSafeArea()
         }
-        .navigationBarBackButtonHidden(true)  // Hide the default back button
+        .navigationBarBackButtonHidden(true)
     }
 }
 
