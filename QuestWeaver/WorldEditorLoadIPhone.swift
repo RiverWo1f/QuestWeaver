@@ -9,12 +9,12 @@ import SwiftUI
 
 struct WorldEditorLoadIPhone: View {
     @Environment(\.dismiss) private var dismiss
-    @State private var buttonsOpacity: Double = 0  // Add this for fade animation
+    @State private var showCreateWorldPopup = false
     
     var body: some View {
         let screenSize = UIScreen.main.bounds.size
         let isIPhoneSE = (screenSize.width <= 375 && screenSize.height <= 667) || (screenSize.width <= 667 && screenSize.height <= 375)
-        let isIPhonePro = screenSize.height >= 844 // For iPhone Pro models
+        let isIPhonePro = screenSize.height >= 844
         
         ZStack {
             Color.black
@@ -26,7 +26,7 @@ struct WorldEditorLoadIPhone: View {
                 .ignoresSafeArea()
                 .offset(y: isIPhonePro ? -20 : 0)
             
-            // Back button with navigation
+            // Back button
             HStack {
                 ZStack {
                     Button {
@@ -43,15 +43,21 @@ struct WorldEditorLoadIPhone: View {
             
             // VStack for other buttons
             VStack(spacing: 20) {
-                // Top button with text
+                // Create World button
                 HStack {
                     ZStack {
-                        Image(isIPhoneSE ? "worldEditorLoadButtonSE" : "worldEditorLoadButton")
-                            .frame(width: isIPhoneSE ? 455/2 : 683/3, height: isIPhoneSE ? 147/2 : 220/3)
-                        
-                        Text("Create World")
-                            .font(.custom("Papyrus", size: isIPhoneSE ? 20 : 24))
-                            .foregroundColor(Color(hex: "f29412"))
+                        Button {
+                            showCreateWorldPopup = true
+                        } label: {
+                            ZStack {
+                                Image(isIPhoneSE ? "worldEditorLoadButtonSE" : "worldEditorLoadButton")
+                                    .frame(width: isIPhoneSE ? 455/2 : 683/3, height: isIPhoneSE ? 147/2 : 220/3)
+                                
+                                Text("Create World")
+                                    .font(.custom("Papyrus", size: isIPhoneSE ? 20 : 24))
+                                    .foregroundColor(Color(hex: "f29412"))
+                            }
+                        }
                     }
                     .offset(x: isIPhoneSE ? -9 : 40)
                     Spacer()
@@ -87,6 +93,61 @@ struct WorldEditorLoadIPhone: View {
             }
             .offset(y: 20)
             .ignoresSafeArea()
+            
+            // Popup overlay
+            if showCreateWorldPopup {
+                Color.black.opacity(0.5)
+                    .ignoresSafeArea()
+                
+                ZStack {
+                    Image(isIPhoneSE ? "createWorldPopupSE" : "createWorldPopup")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: isIPhoneSE ? 300 : 400)
+                    
+                    // Popup text - adjusted offset to be less negative
+                    Text("Name Your World")
+                        .font(.custom("Papyrus", size: isIPhoneSE ? 20 : 24))
+                        .foregroundColor(Color(hex: "f29412"))
+                        .offset(y: isIPhoneSE ? -30 : -40)  // Changed from -40/-50 to -30/-40
+                    
+                    // Buttons
+                    HStack(spacing: 20) {
+                        // Create button (left)
+                        Button {
+                            // Confirm action
+                        } label: {
+                            ZStack {
+                                Image("worldEditorLoadPopupButton")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: isIPhoneSE ? 100 : 150)
+                                
+                                Text("Create")
+                                    .font(.custom("Papyrus", size: isIPhoneSE ? 20 : 24))
+                                    .foregroundColor(Color(hex: "f29412"))
+                            }
+                        }
+                        
+                        // Cancel button (right)
+                        Button {
+                            showCreateWorldPopup = false
+                        } label: {
+                            ZStack {
+                                Image("worldEditorLoadPopupButton")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: isIPhoneSE ? 100 : 150)
+                                
+                                Text("Cancel")
+                                    .font(.custom("Papyrus", size: isIPhoneSE ? 20 : 24))
+                                    .foregroundColor(Color(hex: "f29412"))
+                            }
+                        }
+                    }
+                    .offset(y: isIPhoneSE ? 80 : 100)
+                }
+            }
         }
         .navigationBarBackButtonHidden(true)
     }
