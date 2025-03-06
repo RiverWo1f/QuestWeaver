@@ -10,6 +10,8 @@ import SwiftUI
 struct WorldEditorLoadIPhone: View {
     @Environment(\.dismiss) private var dismiss
     @State private var showCreateWorldPopup = false
+    @State private var worldName: String = ""
+    @FocusState private var isFocused: Bool
     
     var body: some View {
         let screenSize = UIScreen.main.bounds.size
@@ -43,7 +45,7 @@ struct WorldEditorLoadIPhone: View {
             
             // VStack for other buttons
             VStack(spacing: 20) {
-                // Create World button
+                // Top button with text
                 HStack {
                     ZStack {
                         Button {
@@ -103,25 +105,35 @@ struct WorldEditorLoadIPhone: View {
                     Image(isIPhoneSE ? "createWorldPopupSE" : "createWorldPopup")
                         .resizable()
                         .aspectRatio(contentMode: .fit)
-                        .frame(width: isIPhoneSE ? 300 : 400)
+                        .frame(width: isIPhoneSE ? 455 : 683)
                     
-                    // Popup text - adjusted offset to be less negative
-                    Text("Name Your World")
-                        .font(.custom("Papyrus", size: isIPhoneSE ? 20 : 24))
-                        .foregroundColor(Color(hex: "f29412"))
-                        .offset(y: isIPhoneSE ? -30 : -40)  // Changed from -40/-50 to -30/-40
+                    // Text input field
+                    ZStack(alignment: .leading) {
+                        if !isFocused {
+                            Text("Name Your World")
+                                .font(.custom("Papyrus", size: isIPhoneSE ? 20 : 24))
+                                .foregroundColor(.white.opacity(0.7))
+                        }
+                        TextField("", text: $worldName)
+                            .font(.custom("Papyrus", size: isIPhoneSE ? 20 : 24))
+                            .multilineTextAlignment(.leading)
+                            .textFieldStyle(PlainTextFieldStyle())
+                            .foregroundColor(.white)
+                            .accentColor(.white)
+                            .tint(.white)
+                            .focused($isFocused)
+                    }
+                    .offset(x: isIPhoneSE ? 200 : 285, y: isIPhoneSE ? -26 : -26)
                     
                     // Buttons
-                    HStack(spacing: 20) {
+                    HStack(spacing: isIPhoneSE ? -50 : -40) {
                         // Create button (left)
                         Button {
                             // Confirm action
                         } label: {
                             ZStack {
                                 Image("worldEditorLoadPopupButton")
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                    .frame(width: isIPhoneSE ? 100 : 150)
+                                    .frame(width: isIPhoneSE ? 455/2 : 683/3)
                                 
                                 Text("Create")
                                     .font(.custom("Papyrus", size: isIPhoneSE ? 20 : 24))
@@ -131,13 +143,12 @@ struct WorldEditorLoadIPhone: View {
                         
                         // Cancel button (right)
                         Button {
+                            worldName = ""
                             showCreateWorldPopup = false
                         } label: {
                             ZStack {
                                 Image("worldEditorLoadPopupButton")
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                    .frame(width: isIPhoneSE ? 100 : 150)
+                                    .frame(width: isIPhoneSE ? 455/2 : 683/3)
                                 
                                 Text("Cancel")
                                     .font(.custom("Papyrus", size: isIPhoneSE ? 20 : 24))
@@ -145,7 +156,7 @@ struct WorldEditorLoadIPhone: View {
                             }
                         }
                     }
-                    .offset(y: isIPhoneSE ? 80 : 100)
+                    .offset(y: isIPhoneSE ? 100 : 100)
                 }
             }
         }
