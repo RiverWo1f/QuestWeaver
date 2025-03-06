@@ -7,10 +7,15 @@
 
 import SwiftUI
 
+// No need for @_exported, just make sure the files are in the same target
 struct WorldEditorLoadIPhone: View {
     @Environment(\.dismiss) private var dismiss
+    @StateObject private var worldManager = WorldEditorManager()
     @State private var showCreateWorldPopup = false
+    @State private var showDeleteConfirmation = false
     @State private var worldName: String = ""
+    @State private var showDuplicateAlert = false
+    @State private var selectedWorldId: UUID?
     @FocusState private var isFocused: Bool
     
     var body: some View {
@@ -81,13 +86,19 @@ struct WorldEditorLoadIPhone: View {
                 
                 // Bottom button with text
                 HStack {
-                    ZStack {
-                        Image(isIPhoneSE ? "worldEditorLoadButtonSE" : "worldEditorLoadButton")
-                            .frame(width: isIPhoneSE ? 455/2 : 683/3, height: isIPhoneSE ? 147/2 : 220/3)
-                        
-                        Text("Delete World")
-                            .font(.custom("Papyrus", size: isIPhoneSE ? 20 : 24))
-                            .foregroundColor(Color(hex: "f29412"))
+                    Button {
+                        if selectedWorldId != nil {
+                            showDeleteConfirmation = true
+                        }
+                    } label: {
+                        ZStack {
+                            Image(isIPhoneSE ? "worldEditorLoadButtonSE" : "worldEditorLoadButton")
+                                .frame(width: isIPhoneSE ? 455/2 : 683/3, height: isIPhoneSE ? 147/2 : 220/3)
+                            
+                            Text("Delete World")
+                                .font(.custom("Papyrus", size: isIPhoneSE ? 20 : 24))
+                                .foregroundColor(Color(hex: "f29412"))
+                        }
                     }
                     .offset(x: isIPhoneSE ? -9 : 40)
                     Spacer()
@@ -95,6 +106,28 @@ struct WorldEditorLoadIPhone: View {
             }
             .offset(y: 20)
             .ignoresSafeArea()
+            
+            // Right side with world list
+            ZStack(alignment: .topLeading) {
+                ForEach(Array(worldManager.worlds.reversed().enumerated()), id: \.element.id) { index, world in
+                    Button {
+                        selectedWorldId = world.id
+                    } label: {
+                        ZStack {
+                            Image(isIPhoneSE ? "loadWorldBoxSE" : "loadWorldBox")
+                                .opacity(selectedWorldId == world.id ? 1 : 0)
+                            
+                            Text(world.name)
+                                .font(.custom("Papyrus", size: isIPhoneSE ? 18 : 22))
+                                .foregroundColor(.white)
+                        }
+                    }
+                    .offset(y: -40 + CGFloat(index * 55))  // Changed from 60 to 55 for slightly less spacing
+                }
+            }
+            .padding(.trailing, 20)
+            .padding(.leading, -75)
+            .offset(y: 3)
             
             // Popup overlay
             if showCreateWorldPopup {
@@ -129,7 +162,14 @@ struct WorldEditorLoadIPhone: View {
                     HStack(spacing: isIPhoneSE ? -50 : -40) {
                         // Create button (left)
                         Button {
-                            // Confirm action
+                            if worldManager.worldNameExists(worldName.trimmingCharacters(in: .whitespacesAndNewlines)) {
+                                showDuplicateAlert = true
+                            } else {
+                                let newWorld = WorldEditorData(name: worldName.trimmingCharacters(in: .whitespacesAndNewlines))
+                                worldManager.saveWorld(newWorld)
+                                worldName = ""
+                                showCreateWorldPopup = false
+                            }
                         } label: {
                             ZStack {
                                 Image("worldEditorLoadPopupButton")
@@ -140,6 +180,7 @@ struct WorldEditorLoadIPhone: View {
                                     .foregroundColor(Color(hex: "f29412"))
                             }
                         }
+                        .disabled(worldName.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
                         
                         // Cancel button (right)
                         Button {
@@ -158,6 +199,62 @@ struct WorldEditorLoadIPhone: View {
                     }
                     .offset(y: isIPhoneSE ? 100 : 100)
                 }
+                
+                // Add alert for duplicate names
+                .alert("World Already Exists", isPresented: $showDuplicateAlert) {
+                    Button("OK", role: .cancel) { }
+                } message: {
+                    Text("A world with this name already exists. Please choose a different name.")
+                }
+            }
+            
+            // Delete confirmation popup
+            if showDeleteConfirmation {
+                GeometryReader { geometry in
+                    Color.black.opacity(0.5)
+                        .ignoresSafeArea()
+                    
+                    ZStack {
+                        Image(isIPhoneSE ? "deleteWorldPopupSE" : "deleteWorldPopup")
+                            .resizable()
+                            .scaledToFit()
+                        
+                        // Popup Buttons
+                        HStack(spacing: 10) {
+                            // Delete button (left)
+                            Button {
+                                if let id = selectedWorldId {
+                                    worldManager.deleteWorld(withId: id)
+                                    selectedWorldId = nil
+                                }
+                                showDeleteConfirmation = false
+                            } label: {
+                                ZStack {
+                                    Image(isIPhoneSE ? "worldEditorLoadPopupButtonSE" : "worldEditorLoadPopupButton")
+                                    
+                                    Text("Delete")
+                                        .font(.custom("Papyrus", size: isIPhoneSE ? 20 : 24))
+                                        .foregroundColor(Color(hex: "f29412"))
+                                }
+                            }
+                            
+                            // Cancel button (right)
+                            Button {
+                                showDeleteConfirmation = false
+                            } label: {
+                                ZStack {
+                                    Image(isIPhoneSE ? "worldEditorLoadPopupButtonSE" : "worldEditorLoadPopupButton")
+                                    
+                                    Text("Cancel")
+                                        .font(.custom("Papyrus", size: isIPhoneSE ? 20 : 24))
+                                        .foregroundColor(Color(hex: "f29412"))
+                                }
+                            }
+                        }
+                        .position(x: geometry.size.width/2, y: geometry.size.height/2 + 100)
+                    }
+                }
+                .ignoresSafeArea(.keyboard)
             }
         }
         .navigationBarBackButtonHidden(true)
