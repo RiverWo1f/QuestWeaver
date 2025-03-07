@@ -108,26 +108,29 @@ struct WorldEditorLoadIPhone: View {
             .ignoresSafeArea()
             
             // Right side with world list
-            ZStack(alignment: .topLeading) {
-                ForEach(Array(worldManager.worlds.reversed().enumerated()), id: \.element.id) { index, world in
-                    Button {
-                        selectedWorldId = world.id
-                    } label: {
-                        ZStack {
-                            Image(isIPhoneSE ? "loadWorldBoxSE" : "loadWorldBox")
-                                .opacity(selectedWorldId == world.id ? 1 : 0)
-                            
-                            Text(world.name)
-                                .font(.custom("Papyrus", size: isIPhoneSE ? 18 : 22))
-                                .foregroundColor(.white)
+            ScrollView(.vertical, showsIndicators: false) {
+                ZStack(alignment: .topLeading) {
+                    ForEach(Array(worldManager.worlds.reversed().enumerated()), id: \.element.id) { index, world in
+                        Button {
+                            selectedWorldId = world.id
+                        } label: {
+                            ZStack {
+                                Image(isIPhoneSE ? "loadWorldBoxSE" : "loadWorldBox")
+                                    .opacity(selectedWorldId == world.id ? 1 : 0)
+                                
+                                Text(world.name)
+                                    .font(.custom("Papyrus", size: isIPhoneSE ? 18 : 22))
+                                    .foregroundColor(.white)
+                            }
                         }
+                        .offset(y: -40 + CGFloat(index * 55))  // Reduced from 55 to 45 for closer spacing
                     }
-                    .offset(y: -40 + CGFloat(index * 55))  // Changed from 60 to 55 for slightly less spacing
                 }
+                .padding(.trailing, -155)
+                .padding(.leading, -115)
+                .frame(width: 260)
             }
-            .padding(.trailing, 20)
-            .padding(.leading, -75)
-            .offset(y: 3)
+            .offset(x: -52, y: 130) // Added x offset to move everything left
             
             // Popup overlay
             if showCreateWorldPopup {
