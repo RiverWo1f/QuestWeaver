@@ -17,6 +17,7 @@ struct WorldEditorLoadIPhone: View {
     @State private var showDuplicateAlert = false
     @State private var selectedWorldId: UUID?
     @FocusState private var isFocused: Bool
+    @State private var showMaxWorldsAlert = false
     
     var body: some View {
         let screenSize = UIScreen.main.bounds.size
@@ -63,7 +64,11 @@ struct WorldEditorLoadIPhone: View {
                 HStack {
                     ZStack {
                         Button {
-                            showCreateWorldPopup = true
+                            if worldManager.worlds.count >= 4 {
+                                showMaxWorldsAlert = true
+                            } else {
+                                showCreateWorldPopup = true
+                            }
                         } label: {
                             ZStack {
                                 Image(isIPhoneSE ? "worldEditorLoadButtonSE" : "worldEditorLoadButton")
@@ -77,6 +82,11 @@ struct WorldEditorLoadIPhone: View {
                     }
                     .offset(x: isIPhoneSE ? -9 : 40)
                     Spacer()
+                }
+                .alert("Maximum Worlds Reached", isPresented: $showMaxWorldsAlert) {
+                    Button("OK", role: .cancel) { }
+                } message: {
+                    Text("Maximum limit of 4 worlds reached. Please delete a world before creating a new one.")
                 }
                 
                 // Middle button with text
@@ -117,32 +127,29 @@ struct WorldEditorLoadIPhone: View {
             .ignoresSafeArea()
             
             // Right side with world list
-            ScrollView(.vertical, showsIndicators: false) {
-                VStack(spacing: 0) {
-                    ZStack(alignment: .topLeading) {
-                        ForEach(Array(worldManager.worlds.reversed().enumerated()), id: \.element.id) { index, world in
-                            Button {
-                                selectedWorldId = world.id
-                            } label: {
-                                ZStack {
-                                    Image(isIPhoneSE ? "loadWorldBoxSE" : "loadWorldBox")
-                                        .opacity(selectedWorldId == world.id ? 1 : 0)
-                                        .padding(.vertical, 0)
-                                    
-                                    Text(world.name)
-                                        .font(.custom("Papyrus", size: isIPhoneSE ? 18 : 22))
-                                        .foregroundColor(.white)
-                                }
-                            }
-                            .offset(y: -250 + CGFloat(index * 55))
+            VStack(spacing: 0) {
+                ZStack(alignment: .topLeading) {
+                    ForEach(Array(worldManager.worlds.enumerated()), id: \.element.id) { index, world in
+                        ZStack {
+                            Image(isIPhoneSE ? "loadWorldBoxSE" : "loadWorldBox")
+                                .opacity(selectedWorldId == world.id ? 1 : 0)
+                                .padding(.vertical, 0)
+                            
+                            Text(world.name)
+                                .font(.custom("Papyrus", size: isIPhoneSE ? 18 : 22))
+                                .foregroundColor(.white)
                         }
+                        .contentShape(Rectangle())
+                        .onTapGesture {
+                            selectedWorldId = world.id
+                        }
+                        .offset(y: -80 + CGFloat(index * 55))
                     }
                 }
-                .padding(.trailing, -155)
-                .padding(.leading, -115)
-                .frame(width: 260, height: CGFloat(worldManager.worlds.count * 58))
             }
-            .frame(height: 235)
+            .padding(.trailing, -155)
+            .padding(.leading, -115)
+            .frame(width: 260, height: 235)
             .clipped()
             .offset(x: -52, y: 48)
             
@@ -159,7 +166,7 @@ struct WorldEditorLoadIPhone: View {
                     
                     // Text input field
                     ZStack(alignment: .leading) {
-                        if !isFocused {
+                        if !isFocused && worldName.isEmpty {
                             Text("Name Your World")
                                 .font(.custom("Papyrus", size: isIPhoneSE ? 20 : 24))
                                 .foregroundColor(.white.opacity(0.7))
@@ -216,6 +223,7 @@ struct WorldEditorLoadIPhone: View {
                     }
                     .offset(y: isIPhoneSE ? 100 : 100)
                 }
+                .ignoresSafeArea(.keyboard)
                 
                 // Add alert for duplicate names
                 .alert("World Already Exists", isPresented: $showDuplicateAlert) {

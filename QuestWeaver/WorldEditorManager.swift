@@ -20,23 +20,23 @@ import SwiftUI
 
 class WorldEditorManager: ObservableObject {
     @Published var worlds: [WorldEditorData] = []
-    private let fileManager = FileManager.default
+    let maxWorlds = 4
     
     init() {
-        loadWorlds()
+        loadWorldsFromUserDefaults()
     }
     
     // Get the documents directory path
     private func getDocumentsDirectory() -> URL {
-        fileManager.urls(for: .documentDirectory, in: .userDomainMask)[0]
+        FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
     }
     
     // Get the worlds directory path, creating it if needed
     private func getWorldsDirectory() -> URL {
         let worldsPath = getDocumentsDirectory().appendingPathComponent("Worlds")
         
-        if !fileManager.fileExists(atPath: worldsPath.path) {
-            try? fileManager.createDirectory(at: worldsPath, withIntermediateDirectories: true)
+        if !FileManager.default.fileExists(atPath: worldsPath.path) {
+            try? FileManager.default.createDirectory(at: worldsPath, withIntermediateDirectories: true)
         }
         
         return worldsPath
@@ -44,15 +44,23 @@ class WorldEditorManager: ObservableObject {
     
     // Save a new world
     func saveWorld(_ world: WorldEditorData) {
-        let encoder = JSONEncoder()
-        let worldURL = getWorldsDirectory().appendingPathComponent("\(world.id.uuidString).json")
-        
-        do {
-            let data = try encoder.encode(world)
-            try data.write(to: worldURL)
-            loadWorlds()
-        } catch {
-            print("Error saving world: \(error)")
+        if worlds.count < maxWorlds {
+            // Add new world to the end of the array
+            worlds.append(world)
+            saveWorldsToUserDefaults()
+        }
+    }
+    
+    private func saveWorldsToUserDefaults() {
+        if let encoded = try? JSONEncoder().encode(worlds) {
+            UserDefaults.standard.set(encoded, forKey: "savedWorlds")
+        }
+    }
+    
+    private func loadWorldsFromUserDefaults() {
+        if let savedWorlds = UserDefaults.standard.data(forKey: "savedWorlds"),
+           let decodedWorlds = try? JSONDecoder().decode([WorldEditorData].self, from: savedWorlds) {
+            worlds = decodedWorlds
         }
     }
     
@@ -61,7 +69,7 @@ class WorldEditorManager: ObservableObject {
         let worldsPath = getWorldsDirectory()
         
         do {
-            let fileURLs = try fileManager.contentsOfDirectory(at: worldsPath,
+            let fileURLs = try FileManager.default.contentsOfDirectory(at: worldsPath,
                                                              includingPropertiesForKeys: nil)
             worlds = fileURLs.compactMap { url in
                 guard url.pathExtension == "json" else { return nil }
@@ -83,14 +91,10 @@ class WorldEditorManager: ObservableObject {
     
     // Delete a world
     func deleteWorld(withId id: UUID) {
-        let worldURL = getWorldsDirectory().appendingPathComponent("\(id.uuidString).json")
-        
-        do {
-            try fileManager.removeItem(at: worldURL)
-            loadWorlds()
-        } catch {
-            print("Error deleting world: \(error)")
-        }
+        // Remove the world from the array
+        worlds.removeAll { $0.id == id }
+        // Save the updated array to UserDefaults
+        saveWorldsToUserDefaults()
     }
     
     // Check if a world name already exists
