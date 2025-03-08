@@ -32,6 +32,15 @@ struct WorldEditorLoadIPhone: View {
                 .aspectRatio(contentMode: .fill)
                 .ignoresSafeArea()
                 .offset(y: isIPhonePro ? -20 : 0)
+                .mask(
+                    LinearGradient(
+                        gradient: Gradient(stops: [
+                            .init(color: .black, location: 0)
+                        ]),
+                        startPoint: .top,
+                        endPoint: .bottom
+                    )
+                )
             
             // Back button
             HStack {
@@ -109,28 +118,33 @@ struct WorldEditorLoadIPhone: View {
             
             // Right side with world list
             ScrollView(.vertical, showsIndicators: false) {
-                ZStack(alignment: .topLeading) {
-                    ForEach(Array(worldManager.worlds.reversed().enumerated()), id: \.element.id) { index, world in
-                        Button {
-                            selectedWorldId = world.id
-                        } label: {
-                            ZStack {
-                                Image(isIPhoneSE ? "loadWorldBoxSE" : "loadWorldBox")
-                                    .opacity(selectedWorldId == world.id ? 1 : 0)
-                                
-                                Text(world.name)
-                                    .font(.custom("Papyrus", size: isIPhoneSE ? 18 : 22))
-                                    .foregroundColor(.white)
+                VStack(spacing: 0) {
+                    ZStack(alignment: .topLeading) {
+                        ForEach(Array(worldManager.worlds.reversed().enumerated()), id: \.element.id) { index, world in
+                            Button {
+                                selectedWorldId = world.id
+                            } label: {
+                                ZStack {
+                                    Image(isIPhoneSE ? "loadWorldBoxSE" : "loadWorldBox")
+                                        .opacity(selectedWorldId == world.id ? 1 : 0)
+                                        .padding(.vertical, 0)
+                                    
+                                    Text(world.name)
+                                        .font(.custom("Papyrus", size: isIPhoneSE ? 18 : 22))
+                                        .foregroundColor(.white)
+                                }
                             }
+                            .offset(y: -250 + CGFloat(index * 55))
                         }
-                        .offset(y: -40 + CGFloat(index * 55))  // Reduced from 55 to 45 for closer spacing
                     }
                 }
                 .padding(.trailing, -155)
                 .padding(.leading, -115)
-                .frame(width: 260)
+                .frame(width: 260, height: CGFloat(worldManager.worlds.count * 58))
             }
-            .offset(x: -52, y: 130) // Added x offset to move everything left
+            .frame(height: 235)
+            .clipped()
+            .offset(x: -52, y: 48)
             
             // Popup overlay
             if showCreateWorldPopup {
