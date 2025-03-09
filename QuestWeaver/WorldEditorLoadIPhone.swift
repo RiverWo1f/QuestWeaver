@@ -18,6 +18,7 @@ struct WorldEditorLoadIPhone: View {
     @State private var selectedWorldId: UUID?
     @FocusState private var isFocused: Bool
     @State private var showMaxWorldsAlert = false
+    @State private var selectedWorldName: String?
     
     var body: some View {
         let screenSize = UIScreen.main.bounds.size
@@ -107,6 +108,10 @@ struct WorldEditorLoadIPhone: View {
                 HStack {
                     Button {
                         if selectedWorldId != nil {
+                            // Set the selectedWorldName to the name of the world being deleted
+                            if let world = worldManager.worlds.first(where: { $0.id == selectedWorldId }) {
+                                selectedWorldName = world.name
+                            }
                             showDeleteConfirmation = true
                         }
                     } label: {
@@ -151,7 +156,7 @@ struct WorldEditorLoadIPhone: View {
             .padding(.leading, -115)
             .frame(width: 260, height: 235)
             .clipped()
-            .offset(x: -52, y: 48)
+            .offset(x: isIPhoneSE ? -20 : -51, y: isIPhoneSE ? 20 : 48)
             
             // Popup overlay
             if showCreateWorldPopup {
@@ -244,6 +249,12 @@ struct WorldEditorLoadIPhone: View {
                             .resizable()
                             .scaledToFit()
                         
+                        // Display only the name of the world to be deleted in black
+                        Text("\"\(selectedWorldName ?? "Unknown World")\"")
+                            .font(.custom("Papyrus", size: isIPhoneSE ? 20 : 24))
+                            .foregroundColor(.black)
+                            .padding(.bottom, 20) // Add some padding for spacing
+                        
                         // Popup Buttons
                         HStack(spacing: 10) {
                             // Delete button (left)
@@ -276,7 +287,7 @@ struct WorldEditorLoadIPhone: View {
                                 }
                             }
                         }
-                        .position(x: geometry.size.width/2, y: geometry.size.height/2 + 100)
+                        .offset(y: isIPhoneSE ? 110 : 120)
                     }
                 }
                 .ignoresSafeArea(.keyboard)
