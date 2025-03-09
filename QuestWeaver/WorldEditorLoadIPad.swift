@@ -9,9 +9,15 @@ import SwiftUI
 
 struct WorldEditorLoadIPad: View {
     @Environment(\.dismiss) private var dismiss
+    @StateObject private var worldManager = WorldEditorManager()
     @State private var showCreateWorldPopup = false
     @State private var worldName: String = ""
     @FocusState private var isFocused: Bool
+    @State private var showDuplicateAlert = false
+    @State private var selectedWorldId: UUID?
+    @State private var showDeleteConfirmation = false
+    @State private var selectedWorldName: String?
+    @State private var showMaxWorldsAlert = false
     
     private var backgroundImage: String {
         let screenSize = UIScreen.main.bounds.size
@@ -19,14 +25,9 @@ struct WorldEditorLoadIPad: View {
         
         if width >= 1366 {
             return "worldEditorLoadBackgroundIpadPro"  // 12.9" iPad Pro
-        }
-        else if width >= 1180 {
+        } else if width >= 1180 {
             return "worldEditorLoadBackgroundAir"      // iPad Air & 11" iPad Pro
-        }
-        else if width >= 1080 {
-            return "worldEditorLoadBackgroundIpad"     // iPad 8th gen (10.2")
-        }
-        else {
+        } else {
             return "worldEditorLoadBackgroundIpad"     // Smaller iPads
         }
     }
@@ -57,7 +58,7 @@ struct WorldEditorLoadIPad: View {
             return (60, 10)  // iPad Air & 11" iPad Pro
         }
         else {
-            return (51, 40)  // Changed from 53 to 51 for 8th gen
+            return (51, 10)  // Changed from 40 to 20 to move it up for gen 8
         }
     }
     
@@ -120,7 +121,11 @@ struct WorldEditorLoadIPad: View {
                 HStack(spacing: isIpadPro ? 70 : isIpadAir ? 50 : 30) {
                     // Create World button
                     Button {
-                        showCreateWorldPopup = true
+                        if worldManager.worlds.count >= 4 {
+                            showMaxWorldsAlert = true
+                        } else {
+                            showCreateWorldPopup = true
+                        }
                     } label: {
                         ZStack {
                             Image(isIpadPro ? "worldEditorLoadButtonIpadPro" : 
@@ -129,6 +134,11 @@ struct WorldEditorLoadIPad: View {
                                 .font(.custom("Papyrus", size: 24))
                                 .foregroundColor(Color(hex: "f29412"))
                         }
+                    }
+                    .alert("Maximum Worlds Reached", isPresented: $showMaxWorldsAlert) {
+                        Button("OK", role: .cancel) { }
+                    } message: {
+                        Text("Maximum limit of 4 worlds reached. Please delete a world before creating a new one.")
                     }
                     
                     // Load World button
@@ -146,7 +156,13 @@ struct WorldEditorLoadIPad: View {
                     
                     // Delete World button
                     Button {
-                        // Delete action
+                        if selectedWorldId != nil {
+                            // Set the selectedWorldName to the name of the world being deleted
+                            if let world = worldManager.worlds.first(where: { $0.id == selectedWorldId }) {
+                                selectedWorldName = world.name
+                            }
+                            showDeleteConfirmation = true
+                        }
                     } label: {
                         ZStack {
                             Image(isIpadPro ? "worldEditorLoadButtonIpadPro" : 
@@ -162,6 +178,32 @@ struct WorldEditorLoadIPad: View {
             }
             .ignoresSafeArea(.keyboard)
             
+            // Right side with world list
+            ScrollView {
+                VStack(spacing: 0) {
+                    ForEach(Array(worldManager.worlds.enumerated()), id: \.element.id) { index, world in
+                        ZStack {
+                            Image(isIpadPro ? "loadWorldBoxIpadPro" : 
+                                  isIpadAir ? "loadWorldBoxAir" : "loadWorldBoxIpad")
+                                .opacity(selectedWorldId == world.id ? 1 : 0)
+                            
+                            Text(world.name)
+                                .font(.custom("Papyrus", size: 22))
+                                .foregroundColor(.white)
+                        }
+                        .contentShape(Rectangle())
+                        .onTapGesture {
+                            selectedWorldId = world.id
+                        }
+                        .frame(height: isIpadPro ? 90 : isIpadAir ? 90 : 100)
+                    }
+                }
+                .padding(.horizontal, 20)
+                .frame(width: isIpadPro ? 380 : isIpadAir ? 380 : 400)
+            }
+            .frame(height: isIpadPro ? 380 : isIpadAir ? 380 : 420)
+            .offset(x: isIpadPro ? -308 : isIpadAir ? -308 : -291, y: -20)
+
             // Popup overlay
             if showCreateWorldPopup {
                 GeometryReader { geometry in
@@ -178,7 +220,7 @@ struct WorldEditorLoadIPad: View {
                         
                         // Text input field
                         ZStack(alignment: .leading) {
-                            if !isFocused {
+                            if !isFocused && worldName.isEmpty {
                                 Text("Name Your World")
                                     .font(.custom("Papyrus", size: isIpadPro ? 36 : isIpadAir ? 30 : 28))
                                     .foregroundColor(.white.opacity(0.7))
@@ -191,6 +233,15 @@ struct WorldEditorLoadIPad: View {
                                 .accentColor(.white)
                                 .tint(.white)
                                 .focused($isFocused)
+                                .onChange(of: worldName) { newValue in
+                                    if newValue.count > 16 {
+                                        worldName = String(newValue.prefix(16))
+                                    }
+                                }
+                                .onSubmit {
+                                    // Dismiss the keyboard when return is pressed
+                                    isFocused = false
+                                }
                         }
                         .position(x: geometry.size.width/2 + (isIpadPro ? 445 : isIpadAir ? 355 : 305), y: geometry.size.height/2 - 47)
                         
@@ -198,7 +249,16 @@ struct WorldEditorLoadIPad: View {
                         HStack(spacing: isIpadPro ? 35 : isIpadAir ? 30 : 25) {
                             // Create button (left)
                             Button {
-                                // Confirm action
+                                // Check if the world name already exists
+                                if worldManager.worldNameExists(worldName.trimmingCharacters(in: .whitespacesAndNewlines)) {
+                                    showDuplicateAlert = true
+                                } else {
+                                    // Create a new world and save it
+                                    let newWorld = WorldEditorData(name: worldName.trimmingCharacters(in: .whitespacesAndNewlines))
+                                    worldManager.saveWorld(newWorld)
+                                    worldName = "" // Clear the text field
+                                    showCreateWorldPopup = false // Dismiss the popup
+                                }
                             } label: {
                                 ZStack {
                                     Image(isIpadPro ? "worldEditorLoadPopupButtonIpadPro" : 
@@ -212,8 +272,8 @@ struct WorldEditorLoadIPad: View {
                             
                             // Cancel button (right)
                             Button {
-                                worldName = ""
-                                showCreateWorldPopup = false
+                                worldName = "" // Clear the text field
+                                showCreateWorldPopup = false // Dismiss the popup
                             } label: {
                                 ZStack {
                                     Image(isIpadPro ? "worldEditorLoadPopupButtonIpadPro" : 
@@ -226,6 +286,65 @@ struct WorldEditorLoadIPad: View {
                             }
                         }
                         .position(x: geometry.size.width/2, y: geometry.size.height/2 + 180)
+                    }
+                }
+                .ignoresSafeArea(.keyboard)
+            }
+
+            // Delete confirmation popup
+            if showDeleteConfirmation {
+                GeometryReader { geometry in
+                    Color.black.opacity(0.5)
+                        .ignoresSafeArea()
+                    
+                    ZStack {
+                        Image(isIpadPro ? "deleteWorldPopupIpadPro" : 
+                              isIpadAir ? "deleteWorldPopupAir" : "deleteWorldPopupIpad")
+                            .position(x: geometry.size.width/2, y: geometry.size.height/2)
+                        
+                        // Display only the name of the world to be deleted in black
+                        Text("\"\(selectedWorldName ?? "Unknown World")\"")
+                            .font(.custom("Papyrus", size: isIpadPro ? 36 : isIpadAir ? 30 : 28))
+                            .foregroundColor(.black)
+                            .padding(.bottom, 20)
+                            .position(x: geometry.size.width/2, y: geometry.size.height/2)
+                        
+                        // Popup Buttons
+                        HStack(spacing: isIpadPro ? 35 : isIpadAir ? 30 : 25) {
+                            // Delete button (left)
+                            Button {
+                                if let id = selectedWorldId {
+                                    worldManager.deleteWorld(withId: id)
+                                    selectedWorldId = nil
+                                }
+                                showDeleteConfirmation = false
+                            } label: {
+                                ZStack {
+                                    Image(isIpadPro ? "worldEditorLoadPopupButtonIpadPro" : 
+                                          isIpadAir ? "worldEditorLoadPopupButtonAir" : "worldEditorLoadPopupButtonIpad")
+                                    
+                                    Text("Delete")
+                                        .font(.custom("Papyrus", size: 24))
+                                        .foregroundColor(Color(hex: "f29412"))
+                                }
+                            }
+                            
+                            // Cancel button (right)
+                            Button {
+                                showDeleteConfirmation = false
+                            } label: {
+                                ZStack {
+                                    Image(isIpadPro ? "worldEditorLoadPopupButtonIpadPro" : 
+                                          isIpadAir ? "worldEditorLoadPopupButtonAir" : "worldEditorLoadPopupButtonIpad")
+                                    
+                                    Text("Cancel")
+                                        .font(.custom("Papyrus", size: 24))
+                                        .foregroundColor(Color(hex: "f29412"))
+                                }
+                            }
+                        }
+                        .offset(y: isIpadPro ? 180 : 160)
+                        .position(x: geometry.size.width/2, y: geometry.size.height/2)
                     }
                 }
                 .ignoresSafeArea(.keyboard)

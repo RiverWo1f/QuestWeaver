@@ -184,6 +184,11 @@ struct WorldEditorLoadIPhone: View {
                             .accentColor(.white)
                             .tint(.white)
                             .focused($isFocused)
+                            .onChange(of: worldName) { newValue in
+                                if newValue.count > 16 {
+                                    worldName = String(newValue.prefix(16))
+                                }
+                            }
                     }
                     .offset(x: isIPhoneSE ? 200 : 285, y: isIPhoneSE ? -26 : -26)
                     
