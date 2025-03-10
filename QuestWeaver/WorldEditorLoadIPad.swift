@@ -179,30 +179,40 @@ struct WorldEditorLoadIPad: View {
             .ignoresSafeArea(.keyboard)
             
             // Right side with world list
-            ScrollView {
-                VStack(spacing: 0) {
-                    ForEach(Array(worldManager.worlds.enumerated()), id: \.element.id) { index, world in
-                        ZStack {
-                            Image(isIpadPro ? "loadWorldBoxIpadPro" : 
-                                  isIpadAir ? "loadWorldBoxAir" : "loadWorldBoxIpad")
-                                .opacity(selectedWorldId == world.id ? 1 : 0)
-                            
-                            Text(world.name)
-                                .font(.custom("Papyrus", size: 22))
-                                .foregroundColor(.white)
+            ScrollViewReader { scrollProxy in
+                ScrollView {
+                    VStack(spacing: isIpadPro ? 25 : isIpadAir ? 15 : 0) {
+                        ForEach(Array(worldManager.worlds.enumerated()), id: \.element.id) { index, world in
+                            ZStack {
+                                Image(isIpadPro ? "loadWorldBoxIpadPro" : 
+                                      isIpadAir ? "loadWorldBoxAir" : "loadWorldBoxIpad")
+                                    .opacity(selectedWorldId == world.id ? 1 : 0)
+                                
+                                Text(world.name)
+                                    .font(.custom("Papyrus", size: isIpadPro ? 32 : isIpadAir ? 26 : 24))
+                                    .foregroundColor(.white)
+                            }
+                            .contentShape(Rectangle())
+                            .onTapGesture {
+                                selectedWorldId = world.id
+                                withAnimation {
+                                    scrollProxy.scrollTo(world.id, anchor: .center)
+                                }
+                            }
+                            .frame(height: isIpadPro ? 150 : isIpadAir ? 90 : 110)
+                            .id(world.id)
                         }
-                        .contentShape(Rectangle())
-                        .onTapGesture {
-                            selectedWorldId = world.id
-                        }
-                        .frame(height: isIpadPro ? 90 : isIpadAir ? 90 : 100)
                     }
+                    .padding(.horizontal, 20)
+                    .frame(width: isIpadPro ? 500 : isIpadAir ? 380 : 400)
                 }
-                .padding(.horizontal, 20)
-                .frame(width: isIpadPro ? 380 : isIpadAir ? 380 : 400)
+                .simultaneousGesture(DragGesture().onChanged { _ in
+                    selectedWorldId = nil
+                })
+                .frame(height: isIpadPro ? 530 : isIpadAir ? 380 : 400)
+                .offset(x: isIpadPro ? -365 : isIpadAir ? -308 : -291, 
+                       y: isIpadPro ? -30 : isIpadAir ? -10 : -35)
             }
-            .frame(height: isIpadPro ? 380 : isIpadAir ? 380 : 420)
-            .offset(x: isIpadPro ? -308 : isIpadAir ? -308 : -291, y: -20)
 
             // Popup overlay
             if showCreateWorldPopup {

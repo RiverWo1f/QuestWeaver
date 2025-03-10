@@ -20,7 +20,7 @@ import SwiftUI
 
 class WorldEditorManager: ObservableObject {
     @Published var worlds: [WorldEditorData] = []
-    let maxWorlds = 4
+    let maxWorlds = 10
     
     init() {
         loadWorldsFromUserDefaults()

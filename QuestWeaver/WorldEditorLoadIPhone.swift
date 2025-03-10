@@ -65,7 +65,7 @@ struct WorldEditorLoadIPhone: View {
                 HStack {
                     ZStack {
                         Button {
-                            if worldManager.worlds.count >= 4 {
+                            if worldManager.worlds.count >= 10 {
                                 showMaxWorldsAlert = true
                             } else {
                                 showCreateWorldPopup = true
@@ -87,7 +87,7 @@ struct WorldEditorLoadIPhone: View {
                 .alert("Maximum Worlds Reached", isPresented: $showMaxWorldsAlert) {
                     Button("OK", role: .cancel) { }
                 } message: {
-                    Text("Maximum limit of 4 worlds reached. Please delete a world before creating a new one.")
+                    Text("Maximum limit of 10 worlds reached. Please delete a world before creating a new one.")
                 }
                 
                 // Middle button with text
@@ -132,31 +132,37 @@ struct WorldEditorLoadIPhone: View {
             .ignoresSafeArea()
             
             // Right side with world list
-            VStack(spacing: 0) {
-                ZStack(alignment: .topLeading) {
-                    ForEach(Array(worldManager.worlds.enumerated()), id: \.element.id) { index, world in
-                        ZStack {
-                            Image(isIPhoneSE ? "loadWorldBoxSE" : "loadWorldBox")
-                                .opacity(selectedWorldId == world.id ? 1 : 0)
-                                .padding(.vertical, 0)
-                            
-                            Text(world.name)
-                                .font(.custom("Papyrus", size: isIPhoneSE ? 18 : 22))
-                                .foregroundColor(.white)
+            ScrollViewReader { scrollProxy in
+                ScrollView {
+                    VStack(spacing: isIPhoneSE ? 10 : 15) {
+                        ForEach(Array(worldManager.worlds.enumerated()), id: \.element.id) { index, world in
+                            ZStack {
+                                Image(isIPhoneSE ? "loadWorldBoxSE" : "loadWorldBox")
+                                    .opacity(selectedWorldId == world.id ? 1 : 0)
+                                
+                                Text(world.name)
+                                    .font(.custom("Papyrus", size: isIPhoneSE ? 18 : 22))
+                                    .foregroundColor(.white)
+                            }
+                            .contentShape(Rectangle())
+                            .onTapGesture {
+                                selectedWorldId = world.id
+                                withAnimation {
+                                    scrollProxy.scrollTo(world.id, anchor: .center)
+                                }
+                            }
+                            .frame(height: isIPhoneSE ? 50 : 60)
+                            .id(world.id)
                         }
-                        .contentShape(Rectangle())
-                        .onTapGesture {
-                            selectedWorldId = world.id
-                        }
-                        .offset(y: -80 + CGFloat(index * 55))
                     }
+                    .padding(.horizontal, 20)
                 }
+                .simultaneousGesture(DragGesture().onChanged { _ in
+                    selectedWorldId = nil
+                })
+                .frame(width: isIPhoneSE ? 260 : 280, height: isIPhoneSE ? 235 : 255)
+                .offset(x: isIPhoneSE ? -20 : -51, y: isIPhoneSE ? 20 : 48)
             }
-            .padding(.trailing, -155)
-            .padding(.leading, -115)
-            .frame(width: 260, height: 235)
-            .clipped()
-            .offset(x: isIPhoneSE ? -20 : -51, y: isIPhoneSE ? 20 : 48)
             
             // Popup overlay
             if showCreateWorldPopup {
