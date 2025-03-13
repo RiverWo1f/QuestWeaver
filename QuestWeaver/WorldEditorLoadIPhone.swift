@@ -34,15 +34,6 @@ struct WorldEditorLoadIPhone: View {
                 .aspectRatio(contentMode: .fill)
                 .ignoresSafeArea()
                 .offset(y: isIPhonePro ? -20 : 0)
-                .mask(
-                    LinearGradient(
-                        gradient: Gradient(stops: [
-                            .init(color: .black, location: 0)
-                        ]),
-                        startPoint: .top,
-                        endPoint: .bottom
-                    )
-                )
             
             // Back button
             HStack {
@@ -160,8 +151,8 @@ struct WorldEditorLoadIPhone: View {
                 .simultaneousGesture(DragGesture().onChanged { _ in
                     selectedWorldId = nil
                 })
-                .frame(width: isIPhoneSE ? 260 : 280, height: isIPhoneSE ? 235 : 255)
-                .offset(x: isIPhoneSE ? -20 : -51, y: isIPhoneSE ? 20 : 48)
+                .frame(width: isIPhoneSE ? 260 : 280, height: isIPhoneSE ? 235 : 225)
+                .offset(x: isIPhoneSE ? -20 : -45, y: isIPhoneSE ? 20 : 48)
             }
             
             // Popup overlay
@@ -259,15 +250,17 @@ struct WorldEditorLoadIPhone: View {
                         Image(isIPhoneSE ? "deleteWorldPopupSE" : "deleteWorldPopup")
                             .resizable()
                             .scaledToFit()
+                            .position(x: geometry.size.width/2, y: geometry.size.height/2)
                         
                         // Display only the name of the world to be deleted in black
                         Text("\"\(selectedWorldName ?? "Unknown World")\"")
                             .font(.custom("Papyrus", size: isIPhoneSE ? 20 : 24))
                             .foregroundColor(.black)
-                            .padding(.bottom, 20) // Add some padding for spacing
+                            .padding(.bottom, 20)
+                            .position(x: geometry.size.width/2, y: geometry.size.height/2)
                         
                         // Popup Buttons
-                        HStack(spacing: 10) {
+                        HStack(spacing: isIPhoneSE ? 10 : 15) {
                             // Delete button (left)
                             Button {
                                 if let id = selectedWorldId {
@@ -298,7 +291,7 @@ struct WorldEditorLoadIPhone: View {
                                 }
                             }
                         }
-                        .offset(y: isIPhoneSE ? 110 : 120)
+                        .position(x: geometry.size.width/2, y: geometry.size.height/2 + (isIPhoneSE ? 110 : 120))
                     }
                 }
                 .ignoresSafeArea(.keyboard)

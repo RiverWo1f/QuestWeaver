@@ -121,7 +121,7 @@ struct WorldEditorLoadIPad: View {
                 HStack(spacing: isIpadPro ? 70 : isIpadAir ? 50 : 30) {
                     // Create World button
                     Button {
-                        if worldManager.worlds.count >= 4 {
+                        if worldManager.worlds.count >= 10 {
                             showMaxWorldsAlert = true
                         } else {
                             showCreateWorldPopup = true
@@ -138,7 +138,7 @@ struct WorldEditorLoadIPad: View {
                     .alert("Maximum Worlds Reached", isPresented: $showMaxWorldsAlert) {
                         Button("OK", role: .cancel) { }
                     } message: {
-                        Text("Maximum limit of 4 worlds reached. Please delete a world before creating a new one.")
+                        Text("Maximum limit of 10 worlds reached. Please delete a world before creating a new one.")
                     }
                     
                     // Load World button
